@@ -1,6 +1,7 @@
 # Hermes App
 
-## Update(Dec 2021): 
+### Update(Dec 2021): 
+
 This solution has been tested with DeepStream 6.0 that comes with Redis, RedisTimeSeries and Pub/Sub support]
 
 Wildfires have been ever-increasing, devouring our planet earth, rendering our planet worse day by day. With early detection and mitigation, it is possible to reduce the damage caused by wildfires.
