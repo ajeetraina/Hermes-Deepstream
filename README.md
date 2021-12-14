@@ -1,4 +1,4 @@
-# Hermes App
+# Wildfire Detection System using DJI Tello drone, DeepStream 6.0, Jetson Nano and Redis
 
 ### Update(Dec 2021): 
 
