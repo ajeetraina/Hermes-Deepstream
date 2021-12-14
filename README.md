@@ -15,6 +15,7 @@ To better enable our front-line workers, here is Hermes, an AI-powered Computer 
 * [AlexeyAB/darknet](https://github.com/AlexeyAB/darknet)
 * [damiafuentes/DJITelloPy](https://github.com/damiafuentes/DJITelloPy)
 * [moses-palmer/pynput](https://github.com/moses-palmer/pynput)
+* [kn1ghtf1re/Hermes-Deepstream](https://github.com/kn1ghtf1re/Hermes-Deepstream)
 
 ## Index
 
