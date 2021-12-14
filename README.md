@@ -6,6 +6,8 @@ This solution has been tested with DeepStream 6.0 that comes with Redis, RedisTi
 
 Wildfires have been ever-increasing, devouring our planet earth, rendering our planet worse day by day. With early detection and mitigation, it is possible to reduce the damage caused by wildfires.
 
+
+
 ![Wildfires](resources/wildfires.png)
 
 To better enable our front-line workers, here is Hermes, an AI-powered Computer Vision application that helps in early detection of Wildfires using reconnaissance drones.
