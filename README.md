@@ -56,10 +56,136 @@ libjansson4=2.11-1
 
 ### 2. Install Deepstream
 
+#### DeepStream 5.1
+
 Download the DeepStream 5.1 Jetson Debian package `deepstream-5.1_5.1.0-1_arm64.deb`, to the Jetson device from [here](https://developer.nvidia.com/deepstream-getting-started). Then enter the command:
 
 ```sh
 sudo apt install deepstream-5.1_5.1.0-1_arm64.deb
+```
+
+#### DeepStream 6.0
+
+### Install Dependencies
+
+Enter the following commands to install the prerequisite packages:
+
+```
+$ sudo apt install \
+libssl1.0.0 \
+libgstreamer1.0-0 \
+gstreamer1.0-tools \
+gstreamer1.0-plugins-good \
+gstreamer1.0-plugins-bad \
+gstreamer1.0-plugins-ugly \
+gstreamer1.0-libav \
+libgstrtspserver-1.0-0 \
+libjansson4=2.11-1
+```
+
+### Install librdkafka (to enable Kafka protocol adaptor for message broker)
+
+Clone the librdkafka repository from GitHub:
+
+```
+$ git clone https://github.com/edenhill/librdkafka.git
+```
+
+### Configure and build the library:
+
+```
+$ cd librdkafka
+$ git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a
+./configure
+$ make
+$ sudo make install
+```
+
+### Copy the generated libraries to the deepstream directory:
+
+```
+$ sudo mkdir -p /opt/nvidia/deepstream/deepstream-6.0/lib
+$ sudo cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.0/lib
+```
+
+### Install latest NVIDIA BSP packages
+
+Open the apt source configuration file in a text editor, for example:
+
+```
+$ sudo vi /etc/apt/sources.list.d/nvidia-l4t-apt-source.list
+```
+
+Change the repository name and download URL in the deb commands shown below:
+
+```
+deb https://repo.download.nvidia.com/jetson/common r32.6 main
+deb https://repo.download.nvidia.com/jetson/<platform> r32.6 main
+```
+
+<platform> identifies the platform’s processor:
+t186 for Jetson TX2 series
+t194 for Jetson AGX Xavier series or Jetson Xavier NX
+t210 for Jetson Nano or Jetson TX1
+
+For example, if your platform is Jetson Xavier NX:
+
+```
+deb https://repo.download.nvidia.com/jetson/common r32.6 main
+deb https://repo.download.nvidia.com/jetson/t194 r32.6 main
+```
+    
+Save and close the source configuration file.
+
+Enter the commands:
+
+```
+$ sudo apt update
+```
+
+    Install latest NVIDIA V4L2 Gstreamer Plugin using the following command:
+
+```
+    $ sudo apt install --reinstall nvidia-l4t-gstreamer
+```
+    
+If apt prompts you to choose a configuration file, reply Y for yes (to use the NVIDIA updated version of the file).
+
+### Install latest L4T MM and L4T Core packages using following commands:
+
+```
+    $ sudo apt install --reinstall nvidia-l4t-multimedia
+$ sudo apt install --reinstall nvidia-l4t-core
+```
+## Note
+
+You must update the NVIDIA V4L2 GStreamer plugin after flashing Jetson OS from SDK Manager.
+
+## Install the DeepStream SDK
+
+Method 1: Using SDK Manager
+
+Select DeepStreamSDK from the Additional SDKs section along with JP 4.6 software components for installation.
+
+Method 2: Using the DeepStream tar package: https://developer.nvidia.com/deepstream_sdk_v6.0.0_jetsontbz2
+
+Download the DeepStream 6.0 Jetson tar package deepstream_sdk_v6.0.0_jetson.tbz2 to the Jetson device.
+
+Enter the following commands to extract and install the DeepStream SDK:
+
+```
+$  sudo tar -xvf deepstream_sdk_v6.0.0_jetson.tbz2 -C /
+$ cd /opt/nvidia/deepstream/deepstream-6.0
+$ sudo ./install.sh
+$ sudo ldconfig
+```
+    
+Method 3: Using the DeepStream Debian package: https://developer.nvidia.com/deepstream-6.0_6.0.0-1_arm64deb
+
+Download the DeepStream 6.0 Jetson Debian package deepstream-6.0_6.0.0-1_arm64.deb to the Jetson device. Enter the following command:
+
+```
+$ sudo apt-get install ./deepstream-6.0_6.0.0-1_arm64.deb
 ```
 
 ## Ryze Tello Setup
